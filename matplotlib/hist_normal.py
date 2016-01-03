@@ -4,7 +4,7 @@ import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
 
 # read data from a text file. One number per line
-arch = "alice-is-cute-HB101afterN2.txt"
+arch = "./data/HB101-N2-before-worm1_to_15.dat"
 datos = []
 for item in open(arch,'r'):
     item = item.strip()
