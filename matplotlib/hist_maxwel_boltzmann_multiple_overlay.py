@@ -27,7 +27,7 @@ def get_data_list(filename):
     return data_list
 
 
-def plot_hist_and_fit_gauss(data_list, binno=60, normed=1, facecolor="green", linecolor='r--'):
+def plot_hist_and_fit_gauss(data_list, binno=60, normed=1, facecolor="green", linecolor='r--', alpha=0.5):
     """
     return (mu, sigma)
     """
@@ -38,7 +38,8 @@ def plot_hist_and_fit_gauss(data_list, binno=60, normed=1, facecolor="green", li
     params = maxwell.fit(data_list)
     print params
     # plot the histogram of the data
-    (n, bins, patches) = plt.hist(data_list, binno, normed=normed, facecolor=facecolor)
+    #(n, bins, patches) = plt.hist(data_list, binno, range=(0, 50), normed=normed, facecolor=facecolor, alpha=alpha)
+    (n, bins, patches) = plt.hist(data_list, binno, normed=normed, facecolor=facecolor, alpha=alpha)
     x = np.linspace(0, 25, 100)
     # add a 'best fit' line
     plt.plot(x, maxwell.pdf(x, *params), linecolor, lw=3)
@@ -55,7 +56,7 @@ def get_max_likelihood(data_list, loc, scale, weight=45):
 
 
 data_list_1 = get_data_list(FILENAME_1)
-params_1 = plot_hist_and_fit_gauss(data_list_1, facecolor='cyan', linecolor='g--')
+params_1 = plot_hist_and_fit_gauss(data_list_1, facecolor='cyan', linecolor='g--', alpha=1)
 
 data_list_2 = get_data_list(FILENAME_2)
 params_2 = plot_hist_and_fit_gauss(data_list_2, facecolor='magenta')
