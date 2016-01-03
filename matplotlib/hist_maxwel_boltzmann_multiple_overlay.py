@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import matplotlib.pyplot as plt
-import scipy.stats as stats
+from scipy.stats import maxwell
 import numpy as np
 
 FILENAME_1 = "./data/HB101-N2-before-worm1_to_15.dat"
@@ -32,7 +32,6 @@ def plot_hist_and_fit_gauss(data_list, binno=60, normed=1, facecolor="green", li
     return (mu, sigma)
     """
     # fit the data by maxwell-boltzmann distribution
-    maxwell = stats.maxwell
     # mawell.fit returns shape, loc, scale : tuple of floats
     # MLEs for any shape statistics, followed by those for location and
     # scale.
@@ -43,7 +42,17 @@ def plot_hist_and_fit_gauss(data_list, binno=60, normed=1, facecolor="green", li
     x = np.linspace(0, 25, 100)
     # add a 'best fit' line
     plt.plot(x, maxwell.pdf(x, *params), linecolor, lw=3)
+    print get_max_likelihood(data_list, params[0], params[1])
     return params
+
+
+def get_max_likelihood(data_list, loc, scale, weight=45):
+    pdf_array = maxwell.pdf(data_list, loc, scale)
+    likelihood = 1
+    for item in pdf_array:
+        likelihood = item * weight * likelihood
+    return likelihood
+
 
 data_list_1 = get_data_list(FILENAME_1)
 params_1 = plot_hist_and_fit_gauss(data_list_1, facecolor='cyan', linecolor='g--')

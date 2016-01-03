@@ -40,7 +40,16 @@ def plot_hist_and_fit_gauss(data_list, binno=60, normed=1, facecolor="green", al
     # add a 'best fit' line
     y = mlab.normpdf(bins, mu, sigma)
     l = plt.plot(bins, y, linecolor, linewidth=2)
+    print get_max_likelihood(data_list, mu, sigma)
     return (mu, sigma)
+
+
+def get_max_likelihood(data_list, mu, sigma, weight=45):
+    pdf_array = norm.pdf(data_list, mu, sigma)
+    likelihood = 1
+    for item in pdf_array:
+        likelihood = item * weight * likelihood
+    return likelihood
 
 data_list_1 = get_data_list(FILENAME_1)
 mu_sigma_1 = plot_hist_and_fit_gauss(data_list_1, facecolor='cyan', linecolor='g--')
