@@ -32,7 +32,6 @@ def plot_hist_and_fit_gauss(data_list, binno=60, normed=1, facecolor="green", li
     return (mu, sigma)
     """
     # fit the data by maxwell-boltzmann distribution
-    # norm.fit returns (mu, sigma)
     maxwell = stats.maxwell
     # mawell.fit returns shape, loc, scale : tuple of floats
     # MLEs for any shape statistics, followed by those for location and
