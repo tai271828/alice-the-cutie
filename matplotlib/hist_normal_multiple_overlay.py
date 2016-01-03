@@ -53,7 +53,7 @@ mu_sigma = mu_sigma_1 + mu_sigma_2
 #plot
 plt.xlabel('Speed')
 plt.ylabel('Probability')
-plt.title(r'$\mathrm{Histogram\ of\ Bug\ Speed:}\ \mu1=%.3f,\ \sigma1=%.3f,\ \mu2=%.3f,\ \sigma2=%.3f$' % mu_sigma)
+plt.title('Histogram of Bug Speed:\nmu1=%.3f, sigma1=%.3f\nmu2=%.3f, sigma2=%.3f' % mu_sigma)
 plt.grid(True)
 
 plt.show()
