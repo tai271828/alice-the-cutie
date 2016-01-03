@@ -42,7 +42,7 @@ def plot_hist_and_fit_gauss(data_list, binno=60, normed=1, facecolor="green", li
     (n, bins, patches) = plt.hist(data_list, binno, normed=normed, facecolor=facecolor)
     x = np.linspace(0, 25, 100)
     # add a 'best fit' line
-    plt.plot(x, maxwell.pdf(x, *params), lw=3)
+    plt.plot(x, maxwell.pdf(x, *params), linecolor, lw=3)
     return params
 
 data_list_1 = get_data_list(FILENAME_1)
