@@ -54,7 +54,7 @@ params_2 = plot_hist_and_fit_gauss(data_list_2, facecolor='magenta')
 #plot
 plt.xlabel('Speed')
 plt.ylabel('Probability')
-plt.title(r'$\mathrm{Histogram\ of\ Bug\ Speed}$')
+plt.title('Histogram of Bug Speed fitted by maxwell-boltzmann distribution:\nbefore=%.3f,after=%.3f' % (params_1[1], params_2[1]))
 plt.grid(True)
 
 plt.show()
