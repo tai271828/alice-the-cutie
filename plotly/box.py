@@ -2,6 +2,15 @@ import time
 import plotly.plotly as py
 import plotly.graph_objs as go
 
+THRESHOLD = None
+
+def rm_bad_data(data, threshold):
+    rtn_data = []
+    for item in data:
+        if item < threshold:
+            rtn_data.append(item)
+    return rtn_data
+
 
 def get_data(filename):
     data = []
@@ -14,6 +23,8 @@ def get_data(filename):
                 data.append(float(line))
         except ValueError:
             pass
+    if THRESHOLD:
+        data = rm_bad_data(data, THRESHOLD)
     return data
 
 
@@ -82,6 +93,12 @@ for fileno in range(1, 17, 2):
     filename1 = "../data/160109/arr" + str(fileno) + "_1.txt"
     filename2 = "../data/160109/arr" + str(fileno + 1) + "_1.txt"
     data = [get_trace_2(filename1), get_trace_2(filename2)]
-    layout = go.Layout(xaxis=dict(range=[0, 50]))
-    fig = go.Figure(data=data, layout=layout)
-    plot_url = py.plot(fig, filename="160109-1/" + str(fileno))
+    layout = None
+    fig = None
+    if THRESHOLD:
+        layout = go.Layout(xaxis=dict(range=[0, 50]))
+    if layout:
+        fig = go.Figure(data=data, layout=layout)
+    else:
+        fig = go.Figure(data=data)
+    plot_url = py.plot(fig, filename="160109-1-threshold-no/" + str(fileno))
