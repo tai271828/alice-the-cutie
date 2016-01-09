@@ -44,12 +44,12 @@ def get_trace_1(filename):
     )
     return trace
 
-    
+
 def get_trace_2(filename):
     data = get_data(filename)
     trace = go.Box(
         y=data,
-        name='Suspected Outliers',
+        name=filename,
         boxpoints='suspectedoutliers',
         marker=dict(
             color='rgb(8, 81, 156)',
@@ -75,9 +75,10 @@ def get_trace_3(filename):
     )
     return trace
 
-for fileno in range(1, 17):
-    filename = "./data/arr" + str(fileno) + "_1.txt"
-    print filename
-    data = [get_trace_3(filename)]
+
+for fileno in range(1, 17, 2):
+    filename1 = "./data/arr" + str(fileno) + "_1.txt"
+    filename2 = "./data/arr" + str(fileno + 1) + "_1.txt"
+    data = [get_trace_2(filename1), get_trace_2(filename2)]
     plot_url = py.plot(data, filename=str(fileno))
-    print plot_url
+    print filename1, filename2, plot_url
