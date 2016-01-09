@@ -48,7 +48,7 @@ def get_trace_1(filename):
 def get_trace_2(filename):
     data = get_data(filename)
     trace = go.Box(
-        y=data,
+        x=data,
         name=filename,
         boxpoints='suspectedoutliers',
         marker=dict(
@@ -56,9 +56,10 @@ def get_trace_2(filename):
             outliercolor='rgba(219, 64, 82, 0.6)',
             line=dict(
                 outliercolor='rgba(219, 64, 82, 1.0)',
-                outlierwidth=2,
+                outlierwidth=2
             )
         ),
+        boxmean='sd'
     )
     return trace
 
@@ -66,19 +67,21 @@ def get_trace_2(filename):
 def get_trace_3(filename):
     data = get_data(filename)
     trace = go.Box(
-        y=data,
+        x=data,
         name='Whiskers & Outliers',
         marker=dict(
             color='rgb(107, 174, 214)',
         ),
-        boxpoints='Outliers'
+        boxpoints='Outliers',
+        boxmean='sd'
     )
     return trace
 
 
 for fileno in range(1, 17, 2):
-    filename1 = "./data/arr" + str(fileno) + "_1.txt"
-    filename2 = "./data/arr" + str(fileno + 1) + "_1.txt"
+    filename1 = "../data/160109/arr" + str(fileno) + "_1.txt"
+    filename2 = "../data/160109/arr" + str(fileno + 1) + "_1.txt"
     data = [get_trace_2(filename1), get_trace_2(filename2)]
-    plot_url = py.plot(data, filename=str(fileno))
-    print filename1, filename2, plot_url
+    layout = go.Layout(xaxis=dict(range=[0, 50]))
+    fig = go.Figure(data=data, layout=layout)
+    plot_url = py.plot(fig, filename=str(fileno))
