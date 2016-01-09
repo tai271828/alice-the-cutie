@@ -5,7 +5,7 @@ import numpy as np
 import posixpath
 
 
-THRESHOLD = None
+THRESHOLD = 80
 
 
 # read data from a text file. One number per line
@@ -52,5 +52,5 @@ for fileno in range(1, 17, 2):
     #fig['layout'].update(title='Alice is so cute so I plot this for her!!!')
 
     # Plot!
-    py.iplot(fig, filename="160109-histogram-1-no-threshold/" + str(fileno), validate=False)
+    py.iplot(fig, filename="160109-histogram-3-threshold-80/" + str(fileno), validate=False)
 

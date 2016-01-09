@@ -2,7 +2,7 @@ import time
 import plotly.plotly as py
 import plotly.graph_objs as go
 
-THRESHOLD = None
+THRESHOLD = 80
 
 def rm_bad_data(data, threshold):
     rtn_data = []
@@ -96,9 +96,9 @@ for fileno in range(1, 17, 2):
     layout = None
     fig = None
     if THRESHOLD:
-        layout = go.Layout(xaxis=dict(range=[0, 50]))
+        layout = go.Layout(xaxis=dict(range=[0, 100]))
     if layout:
         fig = go.Figure(data=data, layout=layout)
     else:
         fig = go.Figure(data=data)
-    plot_url = py.plot(fig, filename="160109-1-threshold-no/" + str(fileno))
+    plot_url = py.plot(fig, filename="160109-box-3-threshold-80/" + str(fileno))
