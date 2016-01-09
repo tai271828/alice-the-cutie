@@ -84,4 +84,4 @@ for fileno in range(1, 17, 2):
     data = [get_trace_2(filename1), get_trace_2(filename2)]
     layout = go.Layout(xaxis=dict(range=[0, 50]))
     fig = go.Figure(data=data, layout=layout)
-    plot_url = py.plot(fig, filename=str(fileno))
+    plot_url = py.plot(fig, filename="160109-1/" + str(fileno))
