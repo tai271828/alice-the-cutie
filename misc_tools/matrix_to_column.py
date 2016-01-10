@@ -1,25 +1,6 @@
 #!/usr/bin/python
 
-FILENAME="zzz.txt"
-
-def get_data_list(filename):
-    """
-    @filename: filename string
-    return: a list contains the data
-
-    read a file with data which is one-value-per-line and
-    store/return the value as a list.
-    """
-    data_list = []
-    for item in open(filename, 'r'):
-        item = item.strip()
-        if item != '':
-            try:
-                data_list.append(float(item))
-            except ValueError:
-                pass
-    return data_list
-
+FILENAME="arr1new.txt"
 
 def matrix2column(filename):
     """
