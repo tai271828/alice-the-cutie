@@ -3,7 +3,7 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 import posixpath
 
-N = 16
+N = 4
 THRESHOLD = 80
 
 # generate an array of rainbow colors by fixing the saturation and lightness of the HSL representation of colour 
@@ -89,18 +89,27 @@ def get_trace_3(filename):
 
 trace_list = []
 
-for fileno in range(1, N+1):
-    filename = "../data/160109/arr" + str(fileno) + ".txt"
-    trace_list.append(get_trace_2(filename, fileno-1))
+for batch in [1,3,5,7]:
+    for fileno in [batch, batch+1, batch+8, batch+9]:
+        filename = "../data/160110/arr" + str(fileno) + ".txt"
+        if batch == 1:
+            trace_list.append(get_trace_2(filename, 0))
+        elif batch == 3:
+            trace_list.append(get_trace_2(filename, 1))
+        elif batch == 5:
+            trace_list.append(get_trace_2(filename, 2))
+        else:
+            trace_list.append(get_trace_2(filename, 3))
 
-layout = None
-fig = None
 
-if THRESHOLD:
-    layout = go.Layout(yaxis=dict(range=[0, THRESHOLD+20]))
-if layout:
-    fig = go.Figure(data=trace_list, layout=layout)
-else:
-    fig = go.Figure(data=trace_list)
+    layout = None
+    fig = None
 
-plot_url = py.plot(fig, filename="rainbow-160110/threshold-80", auto_open=False)
+    if THRESHOLD:
+        layout = go.Layout(yaxis=dict(range=[0, THRESHOLD+20]))
+    if layout:
+        fig = go.Figure(data=trace_list, layout=layout)
+    else:
+        fig = go.Figure(data=trace_list)
+
+    plot_url = py.plot(fig, filename="rainbow-160110-4batch/threshold-80", auto_open=False)
